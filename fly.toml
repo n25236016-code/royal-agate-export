@@ -1,0 +1,37 @@
+app = "ad-royal-agate-export-main-b63046df"
+primary_region = "sin"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  DJANGO_SETTINGS_MODULE = "config.settings.production"
+  DJANGO_DEBUG = "False"
+  DJANGO_ALLOWED_HOSTS = "ad-royal-agate-export-main-b63046df.fly.dev"
+  USE_SQLITE = "True"
+  DATABASE_PATH = "/data/db.sqlite3"
+  PORT = "8080"
+
+[[mounts]]
+  source = "data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "30s"
+    interval = "15s"
+    method = "GET"
+    timeout = "3s"
+    path = "/api/health/"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
