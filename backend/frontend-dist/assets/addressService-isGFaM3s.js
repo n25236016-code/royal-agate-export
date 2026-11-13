@@ -1,0 +1,1 @@
+import{b as s}from"./index-DtbI5qzd.js";const t="/cart/addresses/",a=async()=>s(t),c=async e=>s(t,{method:"POST",body:e}),o=async(e,r)=>s(`${t}${e}/`,{method:"PATCH",body:r}),n=async e=>s(`${t}${e}/`,{method:"DELETE"}),u=async e=>s("/cart/checkout/preview/",{method:"POST",body:{address_id:e}});export{u as a,c,n as d,a as g,o as u};
